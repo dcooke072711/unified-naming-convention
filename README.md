@@ -3,7 +3,7 @@ aka UNC, is an organization between executor developers to provide a unified scr
 
 ## UNC Has Returned
 
-Who would've thought That Unified Naming Convention Would Return We did not And The reason why we returned is because of the new owner dcooke072711
+Who would've thought That Unified Naming Convention Would Return We did not And The reason why we returned is because of the new Owner dcooke072711
 
 He will Be taking Over Unified Naming Convention And Adding Functions For the New Unified Naming Convention Test
 
