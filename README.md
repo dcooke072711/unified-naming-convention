@@ -1,6 +1,7 @@
 # Unified Naming Convention
 aka UNC, is an organization between executor developers to provide a unified scripting API for our scripters.
 
+Join The Discord To Know When The UNC Script Is Updated! https://discord.gg/a5fKH43Hbm
 ## UNC Has Returned
 
 Who would've thought That Unified Naming Convention Would Return We did not And The reason why we returned is because of the new Owner dcooke072711
