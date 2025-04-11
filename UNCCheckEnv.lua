@@ -529,7 +529,7 @@ test("getcallbackvalue", {}, function()
 	assert(getcallbackvalue(bindable, "OnInvoke") == test, "Did not return the correct value")
 end)
 
-test("GetAllChildren", {}, function()
+test("getallchildren", {}, function()
 	local parent = Instance.new("Folder")
 	parent.Name = "Parent"
 
@@ -559,6 +559,50 @@ test("GetAllChildren", {}, function()
 	assert(#result == 3, "Expected 3 descendants, got " .. tostring(#result))
 end)
 
+test("getglayerfromstring", {}, function()
+	local function GetPlayerFromString(CalledString)
+		if type(CalledString) ~= "string" then
+			return nil
+		end
+
+		local lowerInput = string.lower(CalledString)
+
+		for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+			if string.sub(string.lower(player.Name), 1, #lowerInput) == lowerInput then
+				return player
+			end
+		end
+
+		return nil
+	end
+
+	local mockPlayers = {
+		{Name = "Alice"},
+		{Name = "Bob"},
+		{Name = "Charlie"}
+	}
+
+	local originalGame = game
+	game = {
+		GetService = function(_, serviceName)
+			if serviceName == "Players" then
+				return {
+					GetPlayers = function()
+						return mockPlayers
+					end
+				}
+			end
+		end
+	}
+
+	assert(GetPlayerFromString("Ali").Name == "Alice", "Should return Alice")
+	assert(GetPlayerFromString("Bo").Name == "Bob", "Should return Bob")
+	assert(GetPlayerFromString("CHAR").Name == "Charlie", "Should match case-insensitively")
+	assert(GetPlayerFromString("Zoe") == nil, "Should return nil for non-matching name")
+	assert(GetPlayerFromString(123) == nil, "Should return nil for non-string input")
+
+	game = originalGame
+end)
 
 test("getconnections", {}, function()
 	local types = {
@@ -756,6 +800,7 @@ test("getgenv", {}, function()
 	assert(__TEST_GLOBAL, "Failed to set a global variable")
 	getgenv().__TEST_GLOBAL = nil
 end)
+
 
 test("getloadedmodules", {}, function()
 	local modules = getloadedmodules()
