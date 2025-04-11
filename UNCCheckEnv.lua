@@ -529,6 +529,37 @@ test("getcallbackvalue", {}, function()
 	assert(getcallbackvalue(bindable, "OnInvoke") == test, "Did not return the correct value")
 end)
 
+test("GetAllChildren", {}, function()
+	local parent = Instance.new("Folder")
+	parent.Name = "Parent"
+
+	local child1 = Instance.new("Part")
+	child1.Name = "Child1"
+	child1.Parent = parent
+
+	local child2 = Instance.new("Part")
+	child2.Name = "Child2"
+	child2.Parent = parent
+
+	local grandChild = Instance.new("Part")
+	grandChild.Name = "GrandChild"
+	grandChild.Parent = child1
+
+	local result = GetAllChildren(parent)
+
+	-- Convert result to a lookup table
+	local found = {}
+	for _, obj in ipairs(result) do
+		found[obj] = true
+	end
+
+	assert(found[child1], "Child1 not found in results")
+	assert(found[child2], "Child2 not found in results")
+	assert(found[grandChild], "GrandChild not found in results")
+	assert(#result == 3, "Expected 3 descendants, got " .. tostring(#result))
+end)
+
+
 test("getconnections", {}, function()
 	local types = {
 		Enabled = "boolean",
