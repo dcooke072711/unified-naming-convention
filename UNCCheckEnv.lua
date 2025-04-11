@@ -559,7 +559,7 @@ test("getallchildren", {}, function()
 	assert(#result == 3, "Expected 3 descendants, got " .. tostring(#result))
 end)
 
-test("getglayerfromstring", {}, function()
+test("getplayerfromstring", {}, function()
 	local function GetPlayerFromString(CalledString)
 		if type(CalledString) ~= "string" then
 			return nil
